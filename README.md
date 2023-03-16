@@ -6,6 +6,7 @@ Core:
 [![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-v2.0.4-16er6e.svg?style=plastic)](https://www.sqlalchemy.org/)
 [![Docker](https://img.shields.io/badge/Docker-20.10.8-blue.svg?logo=docker)](https://www.docker.com/)
 [![My CLI App built with Typer](https://img.shields.io/badge/My%20CLI%20App-Typer-4B0082)](https://typer.tiangolo.com/)
+[![Poetry](https://img.shields.io/badge/Poetry-installed-blue?style=flat-square&logo=poetry)](https://python-poetry.org/)
 
 Code style:
 [![Flake8](https://img.shields.io/badge/flake8-6.0.0-red.svg)](https://flake8.pycqa.org/en/6.0.0/)
