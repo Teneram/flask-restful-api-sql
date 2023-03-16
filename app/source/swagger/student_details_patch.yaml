@@ -1,0 +1,73 @@
+swagger: '2.0'
+info:
+  title: "My API"
+  description: "This is API"
+  version: "1.0.0"
+
+patch:
+summary: "Update student data"
+description: "Update student data"
+consumes:
+  - "application/json"
+parameters:
+  - name: "student_id"
+    in: "path"
+    type: "integer"
+    required: true
+  - name: "student_name"
+    in: "body"
+    description: "Student data to update"
+    required: false
+    schema:
+      type: "object"
+      properties:
+        first_name:
+          type: "string"
+          example: "Roman"
+        last_name:
+          type: "string"
+          example: ""
+responses:
+  200:
+    description: "Student data update"
+    schema:
+      $ref: '#/definitions/DataUpdated'
+  404:
+    description: "NOT FOUND"
+    schema:
+      $ref: '#/definitions/DataNotFound'
+  500:
+    description: "INTERNAL SERVER ERROR"
+    schema:
+      $ref: '#/definitions/ServerError'
+definitions:
+  DataUpdated:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+        example: "Some message"
+      student:
+        type: "object"
+        properties:
+          id:
+            type: "integer"
+            example: 8
+          student_first_name:
+            type: "string"
+            example: "Artem"
+          student_last_name:
+            type: "string"
+            example: "Birukovich"
+  DataNotFound:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+        example: "The requested resource does not exist"
+  ServerError:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+        example: "Server error"

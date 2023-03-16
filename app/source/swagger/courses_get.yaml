@@ -1,0 +1,45 @@
+swagger: '2.0'
+info:
+  title: "My API"
+  description: "This is API"
+  version: "1.0.0"
+
+summary: "List of courses"
+description: "Retrieves a list of courses"
+produces:
+  - "application/json"
+
+responses:
+  200:
+    description: "List of courses"
+    schema:
+      $ref: '#/definitions/CoursesData'
+  500:
+    description: "INTERNAL SERVER ERROR"
+    schema:
+      $ref: '#/definitions/ServerError'
+
+definitions:
+  CoursesData:
+    type: "object"
+    properties:
+      data:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            id:
+              type: "integer"
+              example: 5
+            course_description:
+              type: "string"
+              example: "Some description"
+            course_name:
+              type: "string"
+              example: "Politology"
+  ServerError:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+        example: "Server error"

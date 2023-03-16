@@ -1,0 +1,79 @@
+swagger: '2.0'
+info:
+  title: "My API"
+  description: "This is API"
+  version: "1.0.0"
+get:
+summary: "Student detailed information"
+description: "Student detailed information"
+produces:
+  - "application/json"
+parameters:
+  - name: "student_id"
+    in: "path"
+    type: "integer"
+    required: true
+responses:
+  200:
+    description: "Student"
+    schema:
+      $ref: "#/definitions/AllStudentsData"
+  404:
+    description: "NOT FOUND"
+    schema:
+      $ref: "#/definitions/NotFound"
+  500:
+    description: "Internal Server Error"
+    schema:
+      $ref: "#/definitions/ServerError"
+definitions:
+  AllStudentsData:
+    type: "object"
+    properties:
+      courses:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            id:
+              type: "integer"
+              example: 1
+            course_description:
+              type: "string"
+              example: "Some description"
+            course_name:
+              type: "string"
+              example: "Math"
+      group:
+        type: "object"
+        properties:
+          id:
+            type: "integer"
+            example: 3
+          group_name:
+            type: "string"
+            example: "LS-06"
+      student:
+        type: "object"
+        properties:
+          id:
+            type: "integer"
+            example: 8
+          student_first_name:
+            type: "string"
+            example: "Artem"
+          student_last_name:
+            type: "string"
+            example: "Birukovich"
+  NotFound:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+        example: "The requested resource does not exist"
+  ServerError:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+        example: "Server error"

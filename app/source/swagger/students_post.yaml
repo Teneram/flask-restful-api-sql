@@ -1,0 +1,48 @@
+swagger: '2.0'
+info:
+  title: "My API"
+  description: "This is API"
+  version: "1.0.0"
+
+post:
+summary: "Add student"
+description: "Add student"
+produces:
+  - "application/json"
+parameters:
+  - name: "first_name"
+    in: "query"
+    type: "string"
+    required: true
+  - name: "last_name"
+    in: "query"
+    type: "string"
+    required: true
+responses:
+  201:
+    description: "CREATED"
+    schema:
+      $ref: "#/definitions/StudentInfo"
+  500:
+    description: "Internal Server Error"
+    schema:
+      $ref: "#/definitions/ServerError"
+definitions:
+  StudentInfo:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        example: 1
+      student_first_name:
+        type: "string"
+        example: "Yaroslava"
+      student_last_name:
+        type: "string"
+        example: "Teslenko"
+  ServerError:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+        example: "Server error"

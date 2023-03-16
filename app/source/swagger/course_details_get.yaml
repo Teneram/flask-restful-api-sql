@@ -1,0 +1,57 @@
+swagger: '2.0'
+info:
+  title: "My API"
+  description: "This is API"
+  version: "1.0.0"
+
+get:
+summary: "Course details"
+description: "Retrieves a course details"
+produces:
+  - "application/json"
+
+parameters:
+  - name: "course_id"
+    in: "path"
+    type: "integer"
+    required: true
+
+responses:
+  200:
+    description: "Course details"
+    schema:
+      $ref: '#/definitions/CourseDetails'
+  404:
+    description: "NOT FOUND"
+    schema:
+      $ref: '#/definitions/NotFound'
+  500:
+    description: "INTERNAL SERVER ERROR"
+    schema:
+      $ref: '#/definitions/ServerError'
+
+definitions:
+  CourseDetails:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        example: 5
+      course_description:
+        type: "string"
+        example: "Some description"
+      course_name:
+        type: "string"
+        example: "Politology"
+  NotFound:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+        example: "Course with given id does not found"
+  ServerError:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+        example: "Server error"

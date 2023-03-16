@@ -1,0 +1,54 @@
+swagger: '2.0'
+info:
+  title: "My API"
+  description: "This is API"
+  version: "1.0.0"
+
+post:
+summary: "Add a course to a student"
+description: "Add a course"
+produces:
+  - "application/json"
+parameters:
+  - name: "student_id"
+    in: "path"
+    type: "integer"
+    required: true
+  - name: "course"
+    in: "query"
+    description: "Course to assign (random if not selected)"
+    required: false
+    type: "string"
+    enum: [ "Math", "Physics", "Biology", "History", "Geography", "Politology", "Chemistry", "Culture", "Modern art", "Philosophy" ]
+responses:
+  200:
+    description: "Course allocated"
+    schema:
+      $ref: "#/definitions/StudentCourseAllocated"
+  404:
+    description: "NOT FOUND"
+    schema:
+      $ref: "#/definitions/StudentsNotFound"
+  500:
+    description: "Internal Server Error"
+    schema:
+      $ref: "#/definitions/ServerError"
+definitions:
+  StudentCourseAllocated:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+        example: "Course added successfully!"
+  StudentsNotFound:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+        example: "The requested resource does not exist"
+  ServerError:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+        example: "Server error"

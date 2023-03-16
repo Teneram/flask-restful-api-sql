@@ -1,0 +1,54 @@
+swagger: '2.0'
+info:
+  title: "My API"
+  description: "This is API"
+  version: "1.0.0"
+
+
+delete:
+summary: "Delete course of a student"
+description: "Delete a course of a student from the database by their IDs"
+consumes:
+  - "application/json"
+parameters:
+  - name: "student_id"
+    in: "path"
+    type: "integer"
+    required: true
+  - name: "course_id"
+    in: "path"
+    type: "integer"
+    required: true
+responses:
+  200:
+    description: "Course deleted"
+    schema:
+      $ref: '#/definitions/DeleteCourse'
+  404:
+    description: "NOT FOUND"
+    schema:
+      $ref: '#/definitions/ResourceNotFound'
+  500:
+    description: "INTERNAL SERVER ERROR"
+    schema:
+      $ref: '#/definitions/ServerError'
+
+definitions:
+  DeleteCourse:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+        example: "Course deleted successfully"
+  ResourceNotFound:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+        example: "The requested resource does not exist"
+  ServerError:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+        example: "Server error"

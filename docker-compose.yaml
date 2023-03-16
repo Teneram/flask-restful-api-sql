@@ -1,0 +1,56 @@
+version: '3'
+services:
+  app:
+    container_name: flask_app_task_10
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - test_db
+    networks:
+      - mynetwork
+  db:
+    container_name: database_task_10
+    image: postgres:latest
+    environment: &envs
+      FLASK_APP: development
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: qqq1994QQQ
+      POSTGRES_DB: database
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      mynetwork:
+        aliases:
+          - database
+
+  test_db:
+    container_name: test_database_task_10
+    image: postgres:latest
+    environment:
+      <<: *envs
+      FLASK_APP: testing
+      POSTGRES_DB: test_database
+    volumes:
+      - db-data:/var/lib/postgresql/test_data
+    ports:
+      - "6000:6000"
+    networks:
+      mynetwork:
+        aliases:
+          - test_database
+
+volumes:
+  db-data:
+    driver: local
+
+networks:
+  mynetwork:
+    driver: bridge

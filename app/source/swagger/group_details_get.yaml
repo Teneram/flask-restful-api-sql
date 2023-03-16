@@ -1,0 +1,53 @@
+swagger: '2.0'
+info:
+  title: "My API"
+  description: "This is API"
+  version: "1.0.0"
+
+get:
+summary: "Group details"
+description: "Get group details"
+produces:
+  - "application/json"
+parameters:
+  - name: "group_id"
+    in: "path"
+    type: "integer"
+    required: true
+
+responses:
+  200:
+    description: "Group details"
+    schema:
+      $ref: '#/definitions/GroupInfo'
+  404:
+    description: "NOT FOUND"
+    schema:
+      $ref: '#/definitions/GroupNotFound'
+  500:
+    description: "INTERNAL SERVER ERROR"
+    schema:
+      $ref: '#/definitions/ServerError'
+
+definitions:
+  GroupInfo:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        example: 1
+      group_name:
+        type: "string"
+        example: "WT-21"
+  GroupNotFound:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+        example: "Group with given id does not found"
+  ServerError:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+        example: "Server error"

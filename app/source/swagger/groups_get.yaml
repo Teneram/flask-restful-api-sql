@@ -1,0 +1,48 @@
+swagger: '2.0'
+info:
+  title: "My API"
+  description: "This is API"
+  version: "1.0.0"
+
+get:
+summary: "List of groups"
+description: "Retrieves a list of groups"
+produces:
+  - "application/json"
+parameters:
+  - name: "max_students_count"
+    in: "query"
+    type: "integer"
+    required: false
+
+responses:
+  200:
+    description: "List of groups"
+    schema:
+      $ref: '#/definitions/GroupsData'
+  500:
+    description: "INTERNAL SERVER ERROR"
+    schema:
+      $ref: '#/definitions/ServerError'
+
+definitions:
+    GroupsData:
+      type: "object"
+      properties:
+        data:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              id:
+                type: "integer"
+                example: 1
+              group_name:
+                type: "string"
+                example: "WT-21"
+    ServerError:
+      type: "object"
+      properties:
+        message:
+          type: "string"
+          example: "Server error"

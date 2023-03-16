@@ -1,0 +1,61 @@
+swagger: '2.0'
+info:
+  title: "My API"
+  description: "This is API"
+  version: "1.0.0"
+
+get:
+summary: "Retrieve list of students"
+description: "Retrieves a list of students based on the specified course."
+produces:
+  - "application/json"
+parameters:
+  - name: "course"
+    in: "query"
+    description: "Course to filter students by."
+    required: false
+    type: "string"
+    enum: ["Math", "Physics", "Biology", "History", "Geography", "Politology", "Chemistry", "Culture", "Modern art", "Philosophy"]
+responses:
+  200:
+    description: "List of students"
+    schema:
+      $ref: "#/definitions/StudentsData"
+  404:
+    description: "NOT FOUND"
+    schema:
+      $ref: "#/definitions/StudentsNotFound"
+  500:
+    description: "Internal Server Error"
+    schema:
+      $ref: "#/definitions/ServerError"
+definitions:
+  StudentsData:
+    type: "object"
+    properties:
+      data:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            id:
+              type: "integer"
+              example: 1
+            student_first_name:
+              type: "string"
+              example: "Yaroslava"
+            student_last_name:
+              type: "string"
+              example: "Teslenko"
+  StudentsNotFound:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+        example: "The requested resource does not exist"
+  ServerError:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+        example: "Server error"
